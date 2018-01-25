@@ -8,63 +8,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox prefHeight="486.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.razniewski.mp3player.controllers.Mp3PlayerController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="555.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="eu.razniewski.mp3player.controllers.Mp3PlayerController">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" onAction="#onSavePlaylist" text="Save playlist" />
+                  <MenuItem mnemonicParsing="false" onAction="#onOpenPlaylist" text="Open playlist" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.7809364548494984" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="600.0">
+      <SplitPane dividerPositions="0.7809364548494984" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
         <items>
-            <GridPane>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="197.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="232.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="307.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" valignment="BOTTOM" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <Canvas fx:id="canvas" height="200.0" width="535.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" />
-                  <GridPane GridPane.rowIndex="1">
+                  <VBox>
+                     <children>
+                        <StackPane>
+                           <children>
+                              <Canvas fx:id="canvas" height="162.0" width="615.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" VBox.vgrow="SOMETIMES">
+                                 <rotationAxis>
+                                    <Point3D />
+                                 </rotationAxis>
+                              </Canvas>
+                           </children>
+                        </StackPane>
+                        <Slider fx:id="currentDuration" onMouseEntered="#onMouseEnterSlider" onMouseExited="#onMouseLeaveSlider" />
+                     </children>
+                  </VBox>
+                  <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPlay" text="Play">
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                           </padding>
-                        </Button>
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPlay" text="Play" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPause" text="Pause" GridPane.columnIndex="2" />
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onStop" text="Stop" GridPane.columnIndex="1" />
+                        <ProgressIndicator fx:id="progress" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Slider fx:id="volumeSlider" blockIncrement="0.1" max="1.0" value="0.5" GridPane.rowIndex="1" />
+                        <Label text="Volume" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
-                  <Label fx:id="status" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="..." GridPane.rowIndex="2" />
+                  <Label fx:id="status" prefHeight="24.0" prefWidth="630.0" text="..." GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
-            <GridPane>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                </columnConstraints>

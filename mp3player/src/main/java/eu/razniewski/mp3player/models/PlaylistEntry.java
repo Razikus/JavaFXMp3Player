@@ -2,6 +2,7 @@ package eu.razniewski.mp3player.models;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Objects;
 
 public class PlaylistEntry {
 
@@ -29,5 +30,20 @@ public class PlaylistEntry {
     @Override
     public String toString() {
         return title;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PlaylistEntry that = (PlaylistEntry) o;
+        return Objects.equals(fileUri, that.fileUri) &&
+                Objects.equals(title, that.title);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(fileUri, title);
     }
 }
